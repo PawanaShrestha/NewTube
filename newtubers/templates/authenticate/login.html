@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Login</title> 
+{% endblock %}
+
+
+{% block content %}
+
+    <a href="{% url 'home' %}" class="back-to-home">
+        <img src="{% static 'images/back.png' %}" alt="back-arrow" class="back-arrow">
+        <p>Back to Home</p>
+    </a>
+
+
+    <div class="login-form">
+        <h1>Login</h1>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="msg">
+                    {{ message }}
+                </div>  
+            {% endfor %}
+        {% endif %}
+        
+        <hr>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="uname" placeholder="Username" required="required" />
+            <input type="password" name="pass" placeholder="Password" required="required"/>
+            <button type="submit" class="login-btn">Get your NewTube Experience Now!</button>
+        </form>
+
+
+        <div class="below-btn">
+            <hr>
+            <span>Don't have an account?</span>
+            <a href="{% url 'register_user' %}">
+                <span class="register">Signup</span>
+            </a>
+        </div>
+
+    </div>
+
+{% endblock %}

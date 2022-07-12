@@ -1,0 +1,9 @@
+.search-result{
+    font-size: x-large;
+    margin: 5px auto 20px auto;
+    font-weight: 500;
+}
+
+.search-term{
+    font-weight: 600;
+}

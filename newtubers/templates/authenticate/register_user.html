@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <title>SignUp</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <a href="{% url 'home' %}" class="back-to-home">
+        <img src="{% static 'images/back.png' %}" alt="back-arrow" class="back-arrow">
+        <p>Back to Home</p>
+    </a>
+
+    <div class="register-form">
+        <h1>Signup</h1> 
+        
+        <hr>
+
+        <form action="{% url 'register_user' %}" method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="register-btn">Welcome to the NewTube</button>
+        </form>
+
+
+        <div class="below-btn">
+            <hr>
+            <span>Already have an account?</span>
+            <a href="{% url 'login' %}">
+                <span class="login">Login</span>
+            </a>
+        </div>
+
+    </div>
+{% endblock %}

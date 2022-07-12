@@ -1,0 +1,121 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <title>Profile Page</title>
+</head>
+<body>
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="" class="logo">
+                <h1>NewTube</h1>
+            </a>
+        </div>
+        <div class="nav-right flex-div">
+            <div class="dropdown">
+                {% if user.profile.profile_dp %}
+                    <img src="{{ user.profile.profile_dp.url }}" alt="Profile-dp" class="user-icon">
+                {% else %}
+                    <img src="{%static 'images/default-user.png' %}" alt="" class="user-icon">
+                {% endif %}
+                <div class="profile-dropdown">
+                <a href="{% url 'upload-new-video' %}">Upload Video</a>
+                <a href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="top">
+            {% if user.profile.profile_dp %}
+                <img src="{{ user.profile.profile_dp.url }}" alt="Profile-dp" class="profile-icon">
+            {% else %}
+                <img src="{%static 'images/default-user.png' %}" alt="" class="profile-icon">
+            {% endif %}
+            <a href="{% url 'upload-new-video' %}">
+                <button class="upload">
+                    Upload New Video
+                </button>
+            </a>
+        </div>
+        
+        <div class="bottom">
+        
+            <div class="tab">
+                <a href=""></a> <button class="tablinks" onclick="clickHandle(event, 'profile')">User Profile</button>
+                <button class="tablinks" onclick="clickHandle(event, 'videos')">Uploads</button>
+            </div>
+
+
+            <div id="profile" class="tabcontent profile">
+                <h1>My Profile</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="msg">
+                            {{ message }}
+                        </div>  
+                    {% endfor %}
+                {% endif %}
+                <hr>
+                {% for user in users %}
+               <p>Username: </p>
+               <h2>{{ user.username }}</h2> <br>
+               <p>First Name: </p>
+               <h2>{{ user.first_name }}</h2> <br>
+               <p>Last Name: </p>
+               <h2>{{ user.last_name }}</h2> <br>
+               <p>Email: </p>
+               <h2>{{ user.email }}</h2> <br>
+               <p>User Bio:</p><br>
+               <h3>{{user.profile.bio}}</h3>
+                {% endfor %}
+                <div class="edit-profile-btn">
+                    <a href="{% url 'edit_user_profile' %}">
+                        Edit Profile
+                    </a>
+                </div>
+            </div>
+
+
+            <div  id="videos" class="tabcontent vids">
+                <h1>Uploads</h1>
+                <hr>
+                <div class="uploads">
+                    {% for post in posts %}
+                        <div class="videos">
+                            <a href="{% url 'play-video-view' post.pk %} ">
+                                <div class="vid">
+                                    <img src="{{post.thumbnail.url}}" alt="">
+                                    <div class="vid-details">
+                                        <h3>{{post.title}}</h3>
+                                        <h4>Uploaded &bull; {{post.days_ago}} ago</h4>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="btns">
+                                <a href="{%url 'update-post' post.id %}">
+                                    <button class="update-btn">Update</button>
+                                </a>                
+                                <a href="{%url 'delete-post' post.id %}">
+                                    <button class="delete-btn">Delete</button>
+                                </a> 
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+               
+            </div>
+        </div>
+    </main>
+
+    <script src="{% static 'js/profile.js' %}"></script>
+</body>
+</html>

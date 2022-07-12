@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/update_post.css' %}">
+    <title>SignUp</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'home' %}" class="back-to-home">
+        <img src="{% static 'images/back.png' %}" alt="back-arrow" class="back-arrow">
+        <p>Back to Home</p>
+    </a>
+    <div class="update-post-form">
+        {% if user.is_authenticated %}
+   
+        <h1>Update Video</h1> 
+        <hr>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+            
+            <input type="submit" value = "Update Video on NewTube" class="upload-btn">
+        </form>
+        {% else %}
+            <h1>You are not allowed to update this video.</h1>
+        {% endif %}
+    </div>
+{% endblock %}

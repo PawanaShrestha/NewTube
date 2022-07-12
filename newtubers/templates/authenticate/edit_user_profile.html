@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/edit_user_profile.css' %}">
+    <title>Edit User Profile</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <a href="{% url 'user_profile' %}" class="back-to-home">
+        <img src="{% static 'images/back.png' %}" alt="back-arrow" class="back-arrow">
+        <p>Back to Profile</p>
+    </a>
+
+    <div class="edit-user-profile-form">
+        <h1>Edit User Profile</h1> 
+
+        <hr>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {{ u_form.as_p }}
+            {{ p_form.as_p }}
+            
+            <input type="submit" value = "Confirm Update" class="edit-profile-btn">
+        </form>
+
+
+    </div>
+{% endblock %}

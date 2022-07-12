@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/playvideo.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class =  "play-container">
+            <div class="play-video">
+                <video controls autoplay>
+                    <source src="{{post.video.url}}" type="video/mp4">
+                </video>
+
+                <div class="tags">
+                    {{ post.hashtags }} 
+                </div>
+
+                <h3>{{ post.title }}</h3>
+
+                <div class="play-video-info">
+                    <p>Uploaded &bull; {{ post.days_ago }} ago</p>
+                </div>
+
+                <hr>
+
+                <div class="publisher">
+                    <img src="{% static 'images/Jack.png' %}" alt="">
+                    <div>
+                        <a href="{% url 'users_profile' post.uploader %}">
+                            <p>{{ post.uploader }}</p>
+                        </a>
+                    </div>
+                </div>          
+
+                <div class="vid-description">
+                    <p><b>Video Description:</b>
+                        <br><br>
+                        {{ post.description}} </p>
+                    <hr>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

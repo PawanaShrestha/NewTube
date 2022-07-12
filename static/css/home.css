@@ -1,0 +1,68 @@
+/* ------MAIN----- */
+
+.banner{
+    width: 100%;
+} 
+.banner img{
+    width: 100%;
+    border-radius: 8px;
+}
+.fade-img {display: none;}
+.fade-img img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+
+.list-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    margin-top: 15px;
+} 
+
+
+.vid-list .thumbnail{
+    width: 100%;
+    border-radius: 5px;
+    height: 160px;
+    object-fit: cover;
+}
+
+.vid-list .flex-div{
+    align-items: flex-start;
+    margin-top: 7px;
+}
+
+.vid-list .flex-div img{
+    width: 35px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.post-uploader{
+  display: inline;
+}
+
+.flex-div .user-icon{
+  border-radius: 50%;
+}

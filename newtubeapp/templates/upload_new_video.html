@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/upload_new_video.css' %}">
+    <title>SignUp</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'home' %}" class="back-to-home">
+        <img src="{% static 'images/back.png' %}" alt="back-arrow" class="back-arrow">
+        <p>Back to Home</p>
+    </a>
+
+    {% if submitted %}
+
+        <h2 class="success">Your Video was Submitted Successfully!</h2>
+    
+    {% else %}
+        <div class="upload-new-video-form">
+            <h1>Upload New Video</h1> 
+            <hr>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+                
+                <input type="submit" value = "Upload New Video to NewTube" class="upload-btn">
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

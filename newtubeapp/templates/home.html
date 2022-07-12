@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- -------------------MAIN--------------------- -->
+    <div class="container">
+        <div class="slideshow-container banner">
+            {% for adv in ads %}
+            <div class="fade-img">
+                <img src="{{ adv.ad.url }}" alt="">
+            </div>
+            {% endfor %}
+            
+        </div>
+       
+        <div class="list-container">
+            {% for post in posts  %}
+            <div class="vid-list">
+                <a href="{% url 'play-video-view'  post.pk %} "><img src="{{post.thumbnail.url}}" alt="" class="thumbnail"></a>
+                <div class="flex-div">
+                    <div class="vid-info">
+                        <a href="{% url 'play-video-view' post.id %}"> {{ post.title }}</a>
+                        <a href="{% url 'users_profile' post.uploader %}" class="post-uploader">
+                            <p>Uploader: {{ post.uploader }}</p>
+                        </a>
+                        <p>Uploaded &bull; {{post.days_ago}} ago</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/searches.css' %}">
+{% endblock %}
+
+{% block content %}
+    {%if searched %}
+        <div class="container"> 
+            <p class="search-result">Search results for <span class="search-term">"{{searched}}"</span>:</p>
+            <div class="list-container">
+                {% for video in videos %}
+                <div class="vid-list">
+                    <a href="{% url 'play-video-view'  video.pk %} "><img src="{{video.thumbnail.url}}" alt="" class="thumbnail"></a>
+                    <div class="flex-div">
+                        <img src="{% static 'images/Jack.png' %}" alt="">
+                        <div class="vid-info">
+                            <a href="{% url 'play-video-view' video.pk %}"> {{ video.title }}</a>
+                            <p>{{ video.uploader}}</p>
+                            <p>15k Views &bull; {{video.days_ago}} ago</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <p class="search-result" style = "margin: 20px 0 0 20px;"> Please enter <span class="search-term">search keywords </span> to search for videos.</p>
+    {%endif%}
+
+{% endblock %}
